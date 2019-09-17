@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Form, Input, TextArea, Button, Divider, Grid, Image } from 'semantic-ui-react';
+import { Container, Form, Input, TextArea, Button, Grid, Image } from 'semantic-ui-react';
 import People from '../../images/people.svg';
 
 export class ContactComponent extends Component {

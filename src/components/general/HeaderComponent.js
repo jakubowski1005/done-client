@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Menu, Icon, List } from 'semantic-ui-react'
+import { Container, Menu, Icon } from 'semantic-ui-react'
 
 export class HeaderComponent extends Component {
     constructor() {
@@ -25,42 +25,38 @@ export class HeaderComponent extends Component {
 
     render() {
         const { activeItem } = this.state;
-        const styling = {
-            backgroundColor: '#222A59',
-            color: 'white'
-        }
+
         return (
             <Container fluid>
                  <Menu pointing secondary inverted color={'violet'} size='massive'>
-                    <Link to='/'>
+
                         <Menu.Item
                         name='home'
                         active={activeItem === 'home'}
                         onClick={this.handleItemClick}
+                        as={Link} to='/'
                         ><Icon name='check square' />Done!
                         </Menu.Item>
-                      </Link>
+
                      <Menu.Menu position="right" width={6}>
-                        <Link to='/login'>
+
                          <Menu.Item
                          name='signin'
                          active={activeItem === 'signin'}
                          onClick={this.handleItemClick}
-                         link='/login'
+                         as={Link} to='/login'
                          >Sign In
                          </Menu.Item>
-                        </Link>
-                        <Link to='/register'>
+                        
                          <Menu.Item
                          name='signup'
                          active={activeItem === 'signup'}
                          onClick={this.handleItemClick}
-                         >Sign Up
+                         as={Link} to='/register'>Sign up
                          </Menu.Item>
-                        </Link>
+                        
                      </Menu.Menu>
                  </Menu>
-                 
              </Container>
         )
     }

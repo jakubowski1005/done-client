@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Button, Image, Divider, Container, Item, Header } from 'semantic-ui-react';
+import { Grid, Button, Image, Container, Header } from 'semantic-ui-react';
 import List from '../../images/list.svg';
 import Desk from '../../images/desk.png';
 

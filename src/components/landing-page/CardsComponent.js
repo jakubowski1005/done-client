@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Card, Divider, Placeholder, Header } from 'semantic-ui-react';
+import { Container, Grid, Card, Placeholder, Header } from 'semantic-ui-react';
 
 export class CardsComponent extends Component {
     render() {

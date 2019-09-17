@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Container, List, Icon, Divider } from 'semantic-ui-react';
 
 export class FooterComponent extends Component {
@@ -7,10 +6,6 @@ export class FooterComponent extends Component {
         const styling = {
             backgroundColor: '#222A59',
             color: 'white',
-        }
-
-        const link = {
-            
         }
 
         return (

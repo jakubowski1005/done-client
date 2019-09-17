@@ -5,8 +5,8 @@ export class LoginComponent extends Component {
     render() {
         return (
             <div style={{backgroundColor: '#CFCFCF'}}>
-                <Container textAlign='center' style={{minHeight: '700px'}}>
-                    <Segment textAlign='center' style={{width: '600px', marginTop: '100px', paddingTop: '50px'}}>
+                <Container textAlign='center' style={{minHeight: '700px', paddingTop: '100px'}}>
+                    <Segment textAlign='center' style={{width: '600px', paddingTop: '50px', margin: '0 250px 0'}}>
                         <Icon name='user' size='huge'/>
                         <Header as='h1'>Sign in</Header>
                         <Form>
