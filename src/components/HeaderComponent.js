@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Menu, Icon, List } from 'semantic-ui-react'
 
 export class HeaderComponent extends Component {
@@ -31,38 +32,34 @@ export class HeaderComponent extends Component {
         return (
             <Container fluid>
                  <Menu pointing secondary inverted color={'violet'} size='massive'>
-                     <Menu.Item
-                      name='home'
-                      active={activeItem === 'home'}
-                      onClick={this.handleItemClick}
-                      ><Icon name='check square' />Done!
-                      </Menu.Item>
+                    <Link to='/'>
+                        <Menu.Item
+                        name='home'
+                        active={activeItem === 'home'}
+                        onClick={this.handleItemClick}
+                        ><Icon name='check square' />Done!
+                        </Menu.Item>
+                      </Link>
                      <Menu.Menu position="right" width={6}>
+                        <Link to='/login'>
                          <Menu.Item
                          name='signin'
                          active={activeItem === 'signin'}
                          onClick={this.handleItemClick}
+                         link='/login'
                          >Sign In
                          </Menu.Item>
+                        </Link>
+                        <Link to='/register'>
                          <Menu.Item
                          name='signup'
                          active={activeItem === 'signup'}
                          onClick={this.handleItemClick}
                          >Sign Up
-                        </Menu.Item>
+                         </Menu.Item>
+                        </Link>
                      </Menu.Menu>
                  </Menu>
-                 {/* <List horizontal size={'large'}>
-                    <List.Item>
-                        <Icon name='check square'/>Done!
-                    </List.Item>
-                    </List>
-                    <List textAlign='right'>
-                        <List.Item>Sign In</List.Item>
-                        <List.Item>Profile</List.Item>
-                        <List.Item>Sign Up</List.Item>
-                        <List.Item>Logout</List.Item>
-                    </List> */}
                  
              </Container>
         )
