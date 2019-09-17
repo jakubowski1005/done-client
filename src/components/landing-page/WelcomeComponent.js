@@ -1,22 +1,39 @@
 import React, { Component } from 'react'
-import { Grid, Button, Image, Divider } from 'semantic-ui-react';
+import { Grid, Button, Image, Divider, Container, Item, Header } from 'semantic-ui-react';
+import List from '../../images/list.svg';
+import Desk from '../../images/desk.png';
+
 
 export class WelcomeComponent extends Component {
     render() {
+        const styling = {
+            backgroundColor: '#222A59',
+            color: 'white',
+            
+            minHeight: '400px'
+        }
         return (
-            <>
-             <Grid columns={2} padded>
-                 <Grid.Column>
-                    <p>DIVIDE AND CONQUER</p>
-                    <p>Complete your daily tasks using baby steps method</p>
-                    <Button color='blue' size='massive'>Get started</Button>
+            <div >
+            <Container fluid textAlign='center' style={styling}>
+             <Grid padded>
+                 <Grid.Column width={10}>
+                    <Container>
+                    <Image src={List} floated='left' size='small' style={{margin: 0}}/>
+                    {/* <Container textAlign='center'> */}
+                    <Header style={{color: 'white', fontSize: '5rem'}}>divide and conquer</Header>
+                    </Container>
+                    <Container>
+                        <Header style={{color: 'white', fontSize: '3rem'}}>complete your daily tasks using baby steps method</Header>
+                        <Button color='blue' size='massive'>Get started</Button>
+                    </Container>
+                    {/* </Container> */}
                  </Grid.Column>
-                 <Grid.Column>
-                    <Image src='src/images/img1.png' size='small' rounded />
+                 <Grid.Column width={6}>
+                    <Image src={Desk} size='massive' />
                  </Grid.Column>
              </Grid>
-             <Divider />
-            </>
+             </Container>
+            </div>
         )
     }
 }

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+html, *, body, p, h1 {
+    font-family: 'Montserrat', Verdana, Geneva, Tahoma, sans-serif;
+}
+
 /* .App {
   text-align: center;
 }

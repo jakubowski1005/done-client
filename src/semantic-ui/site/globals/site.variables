@@ -1,0 +1,17 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@violet: #222A59;
+@blue: #435090;
+@grey: #CFCFCF;
+@black: #FFFFFF;
+
+@headerFont        : 'Montserrat', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : 'Montserrat', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@fontSmoothing     : antialiased;
+
+@importGoogleFonts : true;
+@googleFontName    : 'Montserrat', 'Lato';
+@googleFontSizes   : '400,700,400italic,700italic';
+@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
