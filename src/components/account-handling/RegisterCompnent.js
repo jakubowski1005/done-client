@@ -13,7 +13,7 @@ export class RegisterCompnent extends Component {
                             <Form.Input placeholder='Username' />
                             <Form.Input placeholder='E-mail' />
                             <Form.Input placeholder='Password' type='password' />
-                            <Form.Input placeholder='Confirm password' />
+                            <Form.Input placeholder='Confirm password' type='password' />
                             <Form.Checkbox label='I agree to the Terms and Conditions' />
                             <Form.Button color='blue' size='huge'>Submit</Form.Button>
                         </Form>

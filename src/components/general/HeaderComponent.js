@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Menu, Icon } from 'semantic-ui-react'
+import { Container, Menu, Icon, Dropdown } from 'semantic-ui-react'
 
 export class HeaderComponent extends Component {
     constructor() {
@@ -38,8 +38,7 @@ export class HeaderComponent extends Component {
                         ><Icon name='check square' />Done!
                         </Menu.Item>
 
-                     <Menu.Menu position="right" width={6}>
-
+                     {!this.isUserLoggedIn && <Menu.Menu position="right" width={6}>
                          <Menu.Item
                          name='signin'
                          active={activeItem === 'signin'}
@@ -47,15 +46,29 @@ export class HeaderComponent extends Component {
                          as={Link} to='/login'
                          >Sign In
                          </Menu.Item>
-                        
                          <Menu.Item
                          name='signup'
                          active={activeItem === 'signup'}
                          onClick={this.handleItemClick}
                          as={Link} to='/register'>Sign up
                          </Menu.Item>
-                        
-                     </Menu.Menu>
+                     </Menu.Menu>}
+
+                     {this.isUserLoggedIn && <Menu.Menu position="right" width={6}>
+                        <Dropdown item trigger={<span><Icon name='user' /> Profile</span>}>
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to='/lists'><Icon name='list ul' /> Lists</Dropdown.Item>
+                                <Dropdown.Item as={Link} to='/profile'><Icon name='user circle' /> Profile</Dropdown.Item>
+                                <Dropdown.Item as={Link} to='/settings'><Icon name='setting' /> Settings</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                         <Menu.Item
+                         name='logout'
+                         active={activeItem === 'logout'}
+                         onClick={this.handleItemClick}
+                         as={Link} to='/logout'>Logout
+                         </Menu.Item>
+                     </Menu.Menu>}
                  </Menu>
              </Container>
         )

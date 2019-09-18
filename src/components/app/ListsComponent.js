@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Segment, Table, Checkbox, Button, Header, Progress, Grid } from 'semantic-ui-react'
+import { Container, Segment, Table, Checkbox, Button, Header, Progress, Grid, Icon } from 'semantic-ui-react'
 
 export class ListsComponent extends Component {
 
@@ -7,6 +7,7 @@ export class ListsComponent extends Component {
         super()
 
         this.state = {
+            username: 'Artur',
             lists: [
             {
                 listname: 'My first list',
@@ -111,14 +112,14 @@ export class ListsComponent extends Component {
         return (
             <div style={{backgroundColor: '#CFCFCF'}}>
                 <Container textAlign='center' style={{padding: '50px 0 50px'}}>
-                    <Header as='h1'>Hello Artur, here you can manage your lists.</Header>
+                    <Header as='h1'>Hello {this.state.username}, here you can manage your lists.</Header>
                     <Button color='violet' size='large'>Add new list</Button>
                     <Grid>
                     { this.state.lists.map( (list) =>
                     <Grid.Column width={8}>
                     <Segment textAlign='center' style={{maxWidth: '500px', marginTop: '50px'}}>
                         <Header style={{color: 'black', fontSize: '2rem'}}>{list.listname}</Header>
-                        <Table color='blue' inverted collapsing>
+                        <Table color='blue' inverted textAlign='center' width='400px'>
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Done?</Table.HeaderCell>
@@ -137,23 +138,26 @@ export class ListsComponent extends Component {
                                     <Table.Cell>{this.getPriority(todo)}</Table.Cell>
                                     <Table.Cell>{todo.description}</Table.Cell>
                                     <Table.Cell>
-                                        <Button color='violet'>Edit</Button>
+                                        {/* <Button color='violet'>Edit</Button> */}
+                                        <Icon size='large' color='grey' name='edit' />
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Button color='violet'>Delete</Button>
+                                        {/* <Button color='red'>Delete</Button> */}
+                                        <Icon size='large' color='grey' name='trash' />
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
                     )}
                             <Table.Footer fullWidth>
                                 <Table.Row>
-                                    <Table.HeaderCell colSpan='5'>
-                                        <Button floated='right' color='blue'>Add</Button>
+                                    <Table.HeaderCell colSpan='5' textAlign='right'>
+                                        {/* <Button floated='right' color='green'>Add</Button> */}
+                                        <Icon name='add' size='large' color='grey' floated='right' />
                                     </Table.HeaderCell>
                                 </Table.Row>
                             </Table.Footer>
                         </Table>
-                        <Progress percent={list.progress} color='violet' progress />
+                        <Progress percent={list.progress*100} color='violet' progress />
                     </Segment>
                     </Grid.Column>
                     )}

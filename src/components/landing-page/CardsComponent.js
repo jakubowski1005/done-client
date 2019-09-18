@@ -39,7 +39,7 @@ export class CardsComponent extends Component {
                                 <Placeholder.Image />
                             </Placeholder>
                             <Card.Content>
-                                <Card.Header>It's uper simple!</Card.Header>
+                                <Card.Header>It's super simple!</Card.Header>
                                 <Card.Description>Simple interface helps you focus on what is important</Card.Description>
                             </Card.Content>
                         </Card>
