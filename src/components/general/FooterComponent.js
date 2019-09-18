@@ -13,13 +13,13 @@ export class FooterComponent extends Component {
                 <Container textAlign='center' fluid>
                     <List divided horizontal size='massive' relaxed='very' verticalAlign='bottom'>
                         <List.Item href='http://facebook.com/'>
-                            <Icon name='facebook' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
+                            <Icon link name='facebook' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
                         </List.Item>
                         <List.Item href='http://linkedin.com/'>
-                            <Icon name='linkedin' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
+                            <Icon link name='linkedin' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
                         </List.Item>
                         <List.Item href='http://github.com/'>
-                            <Icon name='github' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
+                            <Icon link name='github' size='huge' style={{color: 'white', paddingTop: '20px'}}/>
                         </List.Item>
                     </List>
                     <Divider />

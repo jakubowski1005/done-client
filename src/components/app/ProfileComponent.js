@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Message, Icon, Statistic, Placeholder, Segment } from 'semantic-ui-react'
+import { Container, Grid, Message, Icon, Statistic, Placeholder, Segment, Flag } from 'semantic-ui-react'
 
 export class ProfileComponent extends Component {
     constructor() {
@@ -35,7 +35,7 @@ export class ProfileComponent extends Component {
     }
 
     getFlag() {
-        return <span><Icon name={this.state.nationality} /> Poland</span>
+        return <span><Flag fontSize='3rem' name={`${this.state.nationality}`} /> Poland</span>
     }
 
     render() {
@@ -43,20 +43,20 @@ export class ProfileComponent extends Component {
             <div>
                 <Container padding='50px 50px 50px' textAlign='center'>
                     <Grid style={{padding: '100px 0 100px'}}>
-                        <Grid.Column width={4}>
+                        <Grid.Column width={4} textAlign='center'>
                         <Placeholder>
                             <Placeholder.Image square />
                         </Placeholder>
                         </Grid.Column>
-                        <Grid.Column width={4} style={{fontSize: '3rem'}}>
-                            <Segment vertical>{this.getFullName()}</Segment>
-                            <Segment vertical>{this.getGenderIcon()}</Segment>
-                            <Segment vertical>{this.getFlag()}</Segment>
+                        <Grid.Column width={4} textAlign='center'>
+                            <Segment vertical style={{fontSize: '2rem'}}>{this.getFullName()}</Segment>
+                            <Segment vertical style={{fontSize: '2rem'}}>{this.getGenderIcon()}</Segment>
+                            <Segment vertical style={{fontSize: '2rem'}}>{this.getFlag()}</Segment>
                         </Grid.Column>
-                        <Grid.Column width={4}>
+                        <Grid.Column width={4} textAlign='center'>
                             <Message color='violet'>
                                 <Message.Header><Icon name='chart bar' /> Statistics</Message.Header>
-                                <Statistic.Group horizontal>
+                                <Statistic.Group horizontal floated='right'>
                                     <Statistic>
                                         <Statistic.Value>{this.state.stats.activeLists}</Statistic.Value>
                                         <Statistic.Label>Active lists</Statistic.Label>

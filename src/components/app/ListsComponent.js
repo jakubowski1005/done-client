@@ -89,14 +89,18 @@ export class ListsComponent extends Component {
     getPriority(todo) {
         switch (todo.priority) {
             case 1:
-                return '!'
+                return <span><Icon fitted name='exclamation' /></span>
             case 2:
-                return '!!'
+                return <span><Icon fitted name='exclamation' /><Icon fitted name='exclamation' /></span>
             case 3:
-                return '!!!'
+                return <span><Icon fitted name='exclamation' /><Icon fitted name='exclamation' /><Icon fitted name='exclamation' /></span>
             default:
-                return 'no data'
+                return <span><Icon fitted name='question' /></span>
         }
+
+        // setCompletness(todo) {
+        //     this.setState( (prevState, todo) => ({todo.isDone: {`${!prevState.isDone}`}}))
+        // }
     }
 
 
@@ -139,11 +143,11 @@ export class ListsComponent extends Component {
                                     <Table.Cell>{todo.description}</Table.Cell>
                                     <Table.Cell>
                                         {/* <Button color='violet'>Edit</Button> */}
-                                        <Icon size='large' color='grey' name='edit' />
+                                        <Icon link size='large' color='grey' name='edit' />
                                     </Table.Cell>
                                     <Table.Cell>
                                         {/* <Button color='red'>Delete</Button> */}
-                                        <Icon size='large' color='grey' name='trash' />
+                                        <Icon link size='large' color='grey' name='trash' />
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
@@ -152,7 +156,7 @@ export class ListsComponent extends Component {
                                 <Table.Row>
                                     <Table.HeaderCell colSpan='5' textAlign='right'>
                                         {/* <Button floated='right' color='green'>Add</Button> */}
-                                        <Icon name='add' size='large' color='grey' floated='right' />
+                                        <Icon link name='add' size='large' color='grey' floated='right' />
                                     </Table.HeaderCell>
                                 </Table.Row>
                             </Table.Footer>
