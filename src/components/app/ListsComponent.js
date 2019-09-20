@@ -7,76 +7,96 @@ export class ListsComponent extends Component {
         super()
 
         this.state = {
+            id: 1,
             username: 'Artur',
             lists: [
             {
+                id: 1,
                 listname: 'My first list',
                 todos: [
                     {
+                        id: 1,
                         isDone: false,
                         priority: 2,
-                        description: 'Learn to cook'
+                        description: 'Learn to cook',
+                        descEditMode: false
                     },
                     {
+                        id: 2,
                         isDone: true,
                         priority: 1,
-                        description: 'Learn to code'
+                        description: 'Learn to code',
+                        descEditMode: false
                     },
                     {
+                        id: 3,
                         isDone: false,
                         priority: 3,
-                        description: 'Go shopping'
+                        description: 'Go shopping',
+                        descEditMode: false
                     }
-                ],
-                progress: 0.33
+                ]
             },
             {
+                id: 2,
                 listname: 'My second list',
                 todos: [
                     {
+                        id: 4,
                         isDone: true,
                         priority: 1,
-                        description: 'Buy medicines'
+                        description: 'Buy medicines',
+                        descEditMode: false
                     },
                     {
+                        id: 5,
                         isDone: false,
                         priority: 3,
-                        description: 'Feed the cat'
+                        description: 'Feed the cat',
+                        descEditMode: false
                     }
-                ],
-                progress: 0.5
+                ]
             },
             {
+                id: 3,
                 listname: 'My third list',
                 todos: [
                     {
+                        id: 6,
                         isDone: true,
                         priority: 2,
-                        description: 'Buy milk'
+                        description: 'Buy milk',
+                        descEditMode: false
                     },
                     {
+                        id: 7,
                         isDone: false,
                         priority: 1,
-                        description: 'Buy brain'
+                        description: 'Buy brain',
+                        descEditMode: false
                     },
                     {
+                        id: 8,
                         isDone: true,
                         priority: 3,
-                        description: 'Buy whores'
+                        description: 'Buy whores',
+                        descEditMode: false
                     },
                     {
+                        id: 9,
                         isDone: true,
                         priority: 2,
-                        description: 'Buy cocaine'
+                        description: 'Buy cocaine',
+                        descEditMode: false
                     }
-                ],
-                progress: 0.75
+                ]
             }
         ]}
 
         this.getPriority = this.getPriority.bind(this);
         this.getCompleteness = this.getCompleteness.bind(this);
-        // this.calculateProgress = this.calculateProgress.bind(this);
+        this.calculateProgress = this.calculateProgress.bind(this);
+        this.editButtonClicked = this.editButtonClicked.bind(this);
     }
 
     getCompleteness(todo) {
@@ -104,12 +124,19 @@ export class ListsComponent extends Component {
     }
 
 
-    // calculateProgress(list) {
-    //     let completed = list.todos.map( (todo) => {return todo.isDone}).filter( (todo) => {return todo===true});
-    //     console.log(completed.lenght)
-    //     //console.log('Complete status of list: ' + list.listname + ' is ' + completed + ' completed tasks')
-    //     return completed/list.todos.lenght
-    // }
+    calculateProgress(list) {
+        let completed = Object.keys(list.todos.filter( (todo) => {return todo.isDone===true})).length;
+        let all = Object.keys(list.todos).length;
+        let progress = completed/all;
+        return Math.round(progress*100);
+    }
+
+    editButtonClicked(todo) {
+        // let x = {...this.state.lists.todos.descEditMode}
+        // x.descEditMode = true;
+        // this.setState({x})
+        console.log(todo)
+    }
 
     render() {
 
@@ -140,10 +167,11 @@ export class ListsComponent extends Component {
                                         {this.getCompleteness(todo)}
                                     </Table.Cell>
                                     <Table.Cell>{this.getPriority(todo)}</Table.Cell>
-                                    <Table.Cell>{todo.description}</Table.Cell>
+                                    {!todo.descEditMode && <Table.Cell>{todo.description}</Table.Cell>}
+                                    {todo.descEditMode && <Table.Cell>Input</Table.Cell>}
                                     <Table.Cell>
                                         {/* <Button color='violet'>Edit</Button> */}
-                                        <Icon link size='large' color='grey' name='edit' />
+                                        <Icon link size='large' color='grey' name='edit' onClick={this.editButtonClicked} />
                                     </Table.Cell>
                                     <Table.Cell>
                                         {/* <Button color='red'>Delete</Button> */}
@@ -161,7 +189,7 @@ export class ListsComponent extends Component {
                                 </Table.Row>
                             </Table.Footer>
                         </Table>
-                        <Progress percent={list.progress*100} color='violet' progress />
+                        <Progress percent={this.calculateProgress(list)} color='violet' progress />
                     </Segment>
                     </Grid.Column>
                     )}

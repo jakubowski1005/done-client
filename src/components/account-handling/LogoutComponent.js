@@ -24,12 +24,12 @@ export class LogoutComponent extends Component {
     render() {
         return (
             this.state.redirect ? <Redirect to='/' /> :
-            <div>
-                <Container>
+            <div style={{height: '80vh'}}>
+                <Container textAlign='center' style={{padding: '100px 0 100px'}}>
                     <Header>
-                        You have been logged out. 
-                        You will be automatically moved to the home page after {this.state.time} seconds. 
-                        Click <Link to='/'>here</Link> to do it now.
+                        <div>You have been logged out.</div> 
+                        <div>You will be automatically moved to the home page after {this.state.time} seconds.</div> 
+                        <div>Click <Link to='/'>here</Link> to do it now.</div>
                     </Header>
                 </Container>
             </div>

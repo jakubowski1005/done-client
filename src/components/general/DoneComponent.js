@@ -11,6 +11,7 @@ import ListsComponent from '../app/ListsComponent';
 import ProfileComponent from '../app/ProfileComponent'
 import SettingsComponent from '../app/SettingsComponent'
 import ErrorComponent from '../general/ErrorComponent'
+import TermsComponent from '../general/TermsComponent'
 
 export class DoneComponent extends Component {
     render() {
@@ -29,6 +30,7 @@ export class DoneComponent extends Component {
                             <Route path='/lists' component={ListsComponent} />
                             <Route path='/profile' component={ProfileComponent} />
                             <Route path='/settings' component={SettingsComponent} />
+                            <Route path='/terms' component={TermsComponent} />
                             <Route component={ErrorComponent} />
                         </Switch>
                         <FooterComponent />

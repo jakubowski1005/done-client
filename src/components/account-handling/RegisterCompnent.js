@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Segment, Header, Icon, Form } from 'semantic-ui-react';
 
 export class RegisterCompnent extends Component {
+    constructor() {
+        super()
+
+        this.func = this.func.bind(this)
+    }
+
+    func() {
+        return <span>I agree to the <a href='/terms'>Terms and Conditions</a></span>
+    }
+
     render() {
         return (
             <div style={{backgroundColor: '#CFCFCF'}}>
@@ -14,7 +25,7 @@ export class RegisterCompnent extends Component {
                             <Form.Input placeholder='E-mail' />
                             <Form.Input placeholder='Password' type='password' />
                             <Form.Input placeholder='Confirm password' type='password' />
-                            <Form.Checkbox label='I agree to the Terms and Conditions' />
+                            <Form.Checkbox label={<span>I agree to the <a href='/terms'>Terms and Conditions</a></span>} />
                             <Form.Button color='blue' size='huge'>Submit</Form.Button>
                         </Form>
                     </Segment>
