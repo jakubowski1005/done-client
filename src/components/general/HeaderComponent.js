@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Container, Menu, Icon, Dropdown } from 'semantic-ui-react'
+import AuthService from '../../services/AuthService'
 
 export class HeaderComponent extends Component {
     constructor() {
         super()
 
         this.state = {
-            activeItem: 'home'
+            activeItem: 'home',
+            userLoggedIn: this.isUserLoggedIn()
         }
 
         this.handleItemClick = this.handleItemClick.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
         this.isUserLoggedIn = this.isUserLoggedIn.bind(this)
     }
 
@@ -18,10 +21,15 @@ export class HeaderComponent extends Component {
         this.setState({activeItem: name})
     }
 
-    isUserLoggedIn() {
-        return true;
+    handleLogout(event) {
+        this.setState({activeItem: 'home', userLoggedIn: false})
+        AuthService.logout()
+        return <Redirect to='/logout' />
     }
 
+    isUserLoggedIn() {
+        return AuthService.isUserLoggedIn();
+    }
 
     render() {
         const { activeItem } = this.state;
@@ -38,7 +46,7 @@ export class HeaderComponent extends Component {
                         ><Icon name='check square' />Done!
                         </Menu.Item>
 
-                     {!this.isUserLoggedIn && <Menu.Menu position="right" width={6}>
+                     {!this.state.userLoggedIn && <Menu.Menu position="right" width={6}>
                          <Menu.Item
                          name='signin'
                          active={activeItem === 'signin'}
@@ -54,7 +62,7 @@ export class HeaderComponent extends Component {
                          </Menu.Item>
                      </Menu.Menu>}
 
-                     {this.isUserLoggedIn && <Menu.Menu position="right" width={6}>
+                     {this.state.userLoggedIn && <Menu.Menu position="right" width={6}>
                         <Dropdown item trigger={<span><Icon name='user' /> Profile</span>}>
                             <Dropdown.Menu>
                                 <Dropdown.Item as={Link} to='/lists'><Icon name='list ul' /> Lists</Dropdown.Item>
@@ -65,7 +73,7 @@ export class HeaderComponent extends Component {
                          <Menu.Item
                          name='logout'
                          active={activeItem === 'logout'}
-                         onClick={this.handleItemClick}
+                         onClick={this.handleLogout}
                          as={Link} to='/logout'>Logout
                          </Menu.Item>
                      </Menu.Menu>}
