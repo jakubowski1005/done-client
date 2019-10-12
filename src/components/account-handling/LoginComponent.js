@@ -21,7 +21,6 @@ export class LoginComponent extends Component {
         AuthService.loginUser(this.state.usernameOrEmail, this.state.password)
             .then( (res) => {
                 AuthService.registerSuccessfulLoginForJwt(this.state.usernameOrEmail, res.data.token);
-                //this.props.history.push('/')
                 window.location.assign('/')
             })
             .catch( (err) => {
