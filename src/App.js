@@ -5,7 +5,7 @@ import DoneComponent from './components/general/DoneComponent'
 function App() {
   return (
     <div className="App">
-      <DoneComponent />
+        <DoneComponent />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import store from '../../store/store'
+import * as userActions from '../../actions/users'
 import { Container, Segment, Table, Checkbox, Button, Header, Progress, Grid, Icon } from 'semantic-ui-react'
 import EditTodoComponent from '../app/EditTodoComponent'
 import TodoComponent from '../app/TodoComponent'
@@ -101,6 +103,11 @@ export class ListsComponent extends Component {
         this.editButtonClicked = this.editButtonClicked.bind(this);
     }
 
+    componentDidMount() {
+        const username = (sessionStorage.getItem('autheticatedUser')).toString()
+        store.dispatch(userActions.thunkedLoadUserData(username))
+    }
+
     getCompleteness(todo) {
         if(todo.isDone) {
             return <Checkbox defaultChecked />
@@ -182,8 +189,8 @@ export class ListsComponent extends Component {
                                 </Table.Row>
                             </Table.Body>
                     )}
-                            <EditTodoComponent />
-                            <TodoComponent />
+                            {/* <EditTodoComponent />
+                            <TodoComponent /> */}
                             <Table.Footer fullWidth>
                                 <Table.Row>
                                     <Table.HeaderCell colSpan='5' textAlign='right'>

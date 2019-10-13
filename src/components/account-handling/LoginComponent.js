@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Segment, Header, Icon, Form, Message } from 'semantic-ui-react';
 import AuthService from '../../services/AuthService'
 
@@ -21,7 +22,8 @@ export class LoginComponent extends Component {
         AuthService.loginUser(this.state.usernameOrEmail, this.state.password)
             .then( (res) => {
                 AuthService.registerSuccessfulLoginForJwt(this.state.usernameOrEmail, res.data.token);
-                window.location.assign('/')
+                //window.location.assign('/')
+                this.props.history.push('/')
             })
             .catch( (err) => {
                 this.setState({hasFailed: true, message: err.data})

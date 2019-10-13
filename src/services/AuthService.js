@@ -1,6 +1,6 @@
 import axios from 'axios'
+import { API_URL } from '../constants/constants'
 
-const API_URL = 'https://done-application.herokuapp.com/api'
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'autheticatedUser'
 
@@ -16,6 +16,7 @@ class AuthService {
 
     registerSuccessfulLoginForJwt(username, token) {
         sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+        sessionStorage.setItem('token', token);
         this.setupAxiosInterceptors(this.createJwtToken(token))
     }
 

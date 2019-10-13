@@ -1,4 +1,18 @@
 import types from './actionTypes'
+import UserService from '../services/UserService'
+import AuthService from '../services/AuthService'
+
+export const thunkedLoadUserData = (username) =>
+    (dispatch, getState) =>
+        UserService.retrieveUserByUsernameOrEmail(username)
+            .then(res => res.data)
+            .then(user => {
+                dispatch(loadUserData())
+            })
+
+// export const thunkedRemoveUser = (id) =>
+//     (dispatch, getState, UserService) =>
+//         UserService.deleteUserByID()
 
 export const updateUserProps = (userProps) => ({
     type: types.UPDATE_USER_PROPS,
@@ -10,8 +24,9 @@ export const updateUserStats = (userStats) => ({
     userStats
 })
 
-export const removeUser = () => ({
-    type: types.DELETE_USER
+export const removeUser = (id) => ({
+    type: types.DELETE_USER,
+    id: id
 })
 
 export const loadUserData = () => ({
