@@ -20,6 +20,12 @@ class AuthService {
         this.setupAxiosInterceptors(this.createJwtToken(token))
     }
 
+    getLoggedInUsername() {
+        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        if (user === null) return '';
+        return user;
+    }
+
     createJwtToken(token) {
         return 'Bearer ' + token
     }
