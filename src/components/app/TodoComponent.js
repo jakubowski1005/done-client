@@ -1,49 +1,59 @@
-// import React, { Component } from 'react'
-// import { Table, Icon } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Table, Icon, Checkbox } from 'semantic-ui-react'
 
-// export class TodoComponent extends Component {
-//     constructor(props) {
-//         super(props)
+export class TodoComponent extends Component {
+    constructor(props) {
+        super(props)
 
-//         this.state = {}
-//     }
+        this.state = {
+            id: this.props.data.id,
+            description: this.props.data.description,
+            isDone: this.props.data.isDone,
+            priority: this.props.data.priority
+        }
 
-//     componentDidMount() {
-//         // receive todo from api
-//     }
+        this.deleteIconClicked = this.deleteIconClicked.bind(this)
+        this.getPriority = this.getPriority.bind(this)
+    }
 
-//     editIconClicked() {
 
-//     }
 
-//     deleteIconClicked() {
+    deleteIconClicked() {
+        console.log('http delete')
+    }
 
-//     }
+        getPriority(priority) {
+        switch (priority) {
+            case "NORMAL":
+                return <span><Icon fitted name = 'exclamation' /></span>
+            case "HIGH":
+                return <span><Icon fitted name = 'exclamation' /><Icon fitted name = 'exclamation' /></span>
+            case "URGENT":
+                return <span><Icon fitted name = 'exclamation' /><Icon fitted name = 'exclamation' /><Icon fitted name = 'exclamation' /> </span>
+            default:
+                return <span><Icon fitted name = 'question'/></span>
+        }
+    }
 
-//     render(props) {
-//         return (
-//             <div>
-//                 <Table.Body>
-//                     <Table.Row>
-//                         <Table.Cell>
-//                             {this.getCompleteness(props.todo)}
-//                         </Table.Cell>
-//                         <Table.Cell>{this.getPriority(todo)}</Table.Cell>
-//                         {!todo.descEditMode && <Table.Cell>{todo.description}</Table.Cell>}
-//                         {todo.descEditMode && <Table.Cell>Input</Table.Cell>}
-//                         <Table.Cell>
-//                             {/* <Button color='violet'>Edit</Button> */}
-//                             <Icon link size='large' color='grey' name='edit' onClick={this.editIconClicked} />
-//                         </Table.Cell>
-//                         <Table.Cell>
-//                             {/* <Button color='red'>Delete</Button> */}
-//                             <Icon link size='large' color='grey' name='trash' onClick={this.deleteIconClicked} />
-//                         </Table.Cell>
-//                     </Table.Row>
-//                 </Table.Body>
-//             </div>
-//         )
-//     }
-// }
+    render() {
+        return (
+            <>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.Cell>{this.state.isDone ? <Checkbox defaultChecked /> : <Checkbox />}</Table.Cell>
+                        <Table.Cell>{this.getPriority(this.state.priority)}</Table.Cell>
+                        <Table.Cell>{this.state.description}</Table.Cell>
+                        <Table.Cell>
+                            <Icon link size='large' color='grey' name='edit' onClick={this.props.handler} />
+                        </Table.Cell>
+                        <Table.Cell>
+                            <Icon link size='large' color='grey' name='trash' onClick={this.deleteIconClicked} />
+                        </Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </>
+        )
+    }
+}
 
-// export default TodoComponent
+export default TodoComponent

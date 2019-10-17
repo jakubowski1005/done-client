@@ -10,6 +10,9 @@ export class EditTodoComponent extends Component {
             isDone: false,
             priority: 1
         }
+
+        this.okIconClicked = this.okIconClicked.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     okIconClicked() {
@@ -17,9 +20,6 @@ export class EditTodoComponent extends Component {
         this.setState({description: this.description.value})
     }
 
-    cancelIconClicked() {
-
-    }
 
     handleChange = (e, { priority }) => this.setState({ priority: priority })
 
@@ -29,7 +29,6 @@ export class EditTodoComponent extends Component {
         const { value } = this.state.priority
 
         return (
-            //<>
                  <Table.Body>
                     <Table.Row>
                         <Table.Cell>
@@ -49,11 +48,10 @@ export class EditTodoComponent extends Component {
                             <Icon link size='large' color='grey' name='check' onClick={this.okIconClicked} />
                         </Table.Cell>
                         <Table.Cell>
-                            <Icon link size='large' color='grey' name='cancel' onClick={this.cancelIconClicked} />
+                            <Icon link size='large' color='grey' name='cancel' onClick={this.props.handler} />
                         </Table.Cell>
                     </Table.Row>
                 </Table.Body>
-            //</>
         )
     }
 }

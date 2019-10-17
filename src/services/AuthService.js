@@ -32,6 +32,8 @@ class AuthService {
 
     logout() {
         sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        sessionStorage.removeItem('id')
+        sessionStorage.removeItem('token')
     }
 
     isUserLoggedIn() {
@@ -41,12 +43,16 @@ class AuthService {
     }
 
     setupAxiosInterceptors(authHeader) {
-
+        console.log(authHeader)
         axios.interceptors.request.use(
-            (config) => {
-                if (this.isUserLoggedIn()) {
-                    config.headers.authorization = authHeader
-                }
+            function(config) {
+                console.log(config)
+                //if (this.isUserLoggedIn()) {
+                    console.log(sessionStorage.getItem('token'))
+                    const jwt = 'Bearer ' + sessionStorage.getItem('token')
+                    config.headers.Authorization = jwt
+                    //config.headers.accept = "application/json"
+                //}
                 return config
             }
         )

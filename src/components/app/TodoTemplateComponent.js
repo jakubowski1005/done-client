@@ -3,37 +3,30 @@ import TodoComponent from './TodoComponent'
 import EditTodoComponent from './EditTodoComponent'
 
 export class TodoTemplateComponent extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             editMode: false,
-            id: -1,
-            description: '',
+            id: this.props.data.id,
+            description: this.props.data.description,
             isDone: false,
-            priority: 1
+            priority: this.props.data.priority
         }
+
+        this.editModeHandler = this.editModeHandler.bind(this)
     }
 
-    componentDidMount() {
-        this.setState({
-            editMode: false,
-            id: 1,
-            description: 'desc',
-            isDone: false,
-            priority: 2
-        })
-    }
 
-    handleTodoStateChange() {
-        
+    editModeHandler() {
+        this.setState({editMode: !this.state.editMode})
     }
 
     render() {
         return (
             <>
-                {!this.state.editMode && <TodoComponent />}
-                {this.state.editMode && <EditTodoComponent />}
+                {!this.state.editMode && <TodoComponent handler={this.editModeHandler} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
+                {this.state.editMode && <EditTodoComponent handler={this.editModeHandler} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
             </>
         )
     }

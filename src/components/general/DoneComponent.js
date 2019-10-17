@@ -13,9 +13,24 @@ import SettingsComponent from '../app/SettingsComponent'
 import ErrorComponent from '../general/ErrorComponent'
 import TermsComponent from '../general/TermsComponent'
 import AuthenticatedRoute from '../account-handling/AuthenticatedRoute'
+import axios from 'axios'
 
 export class DoneComponent extends Component {
     render() {
+
+        (function() {
+     const jwt = 'Bearer ' + sessionStorage.getItem('token');
+     if (jwt) {
+         axios.defaults.headers.common['Authorization'] = jwt;
+     } else {
+         axios.defaults.headers.common['Authorization'] = null;
+         /*if setting null does not remove `Authorization` header then try     
+           delete axios.defaults.headers.common['Authorization'];
+         */
+     }
+})()
+
+
         return (
             <div>
                 <Router>
