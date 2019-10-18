@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Container, Segment, Header, Icon, Form, Message } from 'semantic-ui-react';
 import AuthService from '../../services/AuthService';
 

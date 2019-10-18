@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Segment, Table, Checkbox, Progress, Grid, Icon, Input, Dropdown, Label } from 'semantic-ui-react'
+import { Segment, Table, Progress, Grid, Icon, Input, Dropdown, Label } from 'semantic-ui-react'
 import TodoTemplateComponent from './TodoTemplateComponent'
 import TodoListService from '../../services/TodoListService'
-//import { colorsArr, mapColorToNumberValue } from './ColorsManager'
 
 export class EditTodoListComponent extends Component {
     constructor(props) {
@@ -20,8 +19,6 @@ export class EditTodoListComponent extends Component {
 
     }
 
-
-
     calculateProgress() {
         let completed = Object.keys(this.state.todos.filter((todo) => {
             return todo.isDone === true
@@ -31,17 +28,31 @@ export class EditTodoListComponent extends Component {
         return Math.round(progress * 100);
     }
 
-       okIconClicked() {
-           console.log(this.state)
-           const list = {
-               listname: this.state.listname,
-               color: mapColorToNumberValue(this.state.color),
-               todos: this.state.todos
-           }
-           console.log(list)
-           const userId = sessionStorage.getItem('id')
-
-           this.state.id === -1 ? TodoListService.addNewList(userId, list) : TodoListService.updateList(userId, this.state.id, list)
+    okIconClicked() {
+        console.log(this.state)
+        const userId = sessionStorage.getItem('id')
+        const list = {
+            listname: this.state.listname,
+            color: mapColorToNumberValue(this.state.color),
+            todos: this.state.todos,
+            user_id: parseInt(userId)
+        }
+        console.log(list)
+           
+        if(this.state.id === -1) {
+            TodoListService.addNewList(userId, list)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        } else {  
+            TodoListService.updateList(userId, this.state.id, list)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        }
+        console.log("1")
+        this.props.handler()
+        console.log("2")
+        this.props.refresh()
+        console.log("3")
        }
 
 
@@ -54,11 +65,7 @@ export class EditTodoListComponent extends Component {
     }
 
     render() {
-
         const { color } = this.state.color
-        //const colors = colorsArr
-
-
         return (
             <div>
                 <Grid.Column width={8}>
@@ -112,11 +119,6 @@ const colorsArr = [{
           key: 'red',
           text: <Label circular color='red'/>,
           value: 'red'
-      },
-      {
-          key: 'blue',
-          text: <Label circular color='blue'/>,
-          value: 'blue'
       },
       {
           key: 'purple',

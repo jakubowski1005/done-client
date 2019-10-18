@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Segment, Table, Checkbox, Header, Progress, Grid, Icon, Label } from 'semantic-ui-react'
+import { Segment, Table, Header, Progress, Grid, Icon, Label } from 'semantic-ui-react'
 import TodoTemplateComponent from './TodoTemplateComponent'
+import TodoListService from '../../services/TodoListService'
 
 export class TodoListComponent extends Component {
     constructor(props) {
@@ -34,7 +35,12 @@ export class TodoListComponent extends Component {
     }
 
     deleteIconClicked() {
-        console.log('http delete')
+        const userId = parseInt(sessionStorage.getItem('id'))
+        TodoListService.deleteList(userId, this.state.id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        
+        this.props.refresh()
     }
 
 

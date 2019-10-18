@@ -24,9 +24,6 @@ export class DoneComponent extends Component {
          axios.defaults.headers.common['Authorization'] = jwt;
      } else {
          axios.defaults.headers.common['Authorization'] = null;
-         /*if setting null does not remove `Authorization` header then try     
-           delete axios.defaults.headers.common['Authorization'];
-         */
      }
 })()
 

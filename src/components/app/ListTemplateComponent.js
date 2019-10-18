@@ -19,14 +19,15 @@ export class ListTemplateComponent extends Component {
 
     editModeHandler() {
         this.setState({editMode: !this.state.editMode})
+        this.props.refresh()
     }
 
 
     render() {
         return (
             <>
-            {this.state.editMode && <EditTodoListComponent handler={this.editModeHandler} data={{id: this.state.id, listname: this.state.listname, color: this.state.color, todos: this.state.todos}} />}
-            {!this.state.editMode && <TodoListComponent handler={this.editModeHandler} data={{id: this.state.id, listname: this.state.listname, color: this.state.color, todos: this.state.todos}} />}
+            {this.state.editMode && <EditTodoListComponent refresh={this.props.refresh} handler={this.editModeHandler} data={{id: this.state.id, listname: this.state.listname, color: this.state.color, todos: this.state.todos}} />}
+            {!this.state.editMode && <TodoListComponent refresh={this.props.refresh} handler={this.editModeHandler} data={{id: this.state.id, listname: this.state.listname, color: this.state.color, todos: this.state.todos}} />}
             </>
         )
     }

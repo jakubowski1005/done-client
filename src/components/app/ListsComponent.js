@@ -19,30 +19,36 @@ export class ListsComponent extends Component {
         }
 
         this.handleNewListVisibility = this.handleNewListVisibility.bind(this)
+        this.refreshLists = this.refreshLists.bind(this)
     }
 
     componentDidMount() {
-        UserService.retrieveUserByUsernameOrEmail(this.state.username)
-        .then( res => {
-            this.setState({
-                userId: res.data[0].id,
-            })
-            sessionStorage.setItem('id', res.data[0].id)
+        this.refreshLists()
+    }
 
-            TodoListService.retrieveAllLists(this.state.userId)
-                .then(res => {
-                    this.setState({
-                        lists: res.data
-                    })
-                }).catch(err => console.log(err));
-            
-        }).catch( err => console.log(err))
+    refreshLists() {
+        UserService.retrieveUserByUsernameOrEmail(this.state.username)
+            .then(res => {
+                this.setState({
+                    userId: res.data[0].id,
+                })
+                sessionStorage.setItem('id', res.data[0].id)
+
+                TodoListService.retrieveAllLists(this.state.userId)
+                    .then(res => {
+                        this.setState({
+                            lists: res.data
+                        })
+                    }).catch(err => console.log(err));
+
+            }).catch(err => console.log(err))
 
         console.log(this.state)
     }
 
     handleNewListVisibility() {
         this.setState({newListVisible: !this.state.newListVisible})
+        this.refreshLists()
     }
 
 
@@ -53,9 +59,9 @@ export class ListsComponent extends Component {
                     <Header as='h1'>Hello {this.state.username}, here you can manage your lists.</Header>
                     <Button color='violet' size='large' onClick={() => this.setState({newListVisible: !this.state.newListVisible})}>Add new list</Button>
                     <Grid>
-                    { this.state.newListVisible && <EditTodoListComponent handler={this.handleNewListVisibility} data={{editMode: true, id: -1, color: 'violet', todos: []}} />}
+                    { this.state.newListVisible && <EditTodoListComponent refresh={this.refreshLists} handler={this.handleNewListVisibility} data={{editMode: true, id: -1, color: 'violet', todos: []}} />}
                     { this.state.lists.map( (list) =>
-                        <ListTemplateComponent data={list} />
+                        <ListTemplateComponent refresh={this.refreshLists} data={list} />
                     )}
                     </Grid>
                 </Container>

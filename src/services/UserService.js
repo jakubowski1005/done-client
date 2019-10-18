@@ -1,15 +1,10 @@
 import axios from 'axios'
-import AuthService from '../services/AuthService'
 import { API_USERS_URL } from '../constants/constants'
 
 class UserService {
     
     retrieveUserByUsernameOrEmail(usernameOrEmail) {
-        //const token = sessionStorage.getItem('token').toString();
-        //AuthService.setupAxiosInterceptors(AuthService.createJwtToken(token))
-        const headers = {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
-        console.log(headers)
-        return axios.get(`${API_USERS_URL}?username=${usernameOrEmail}`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+        return axios.get(`${API_USERS_URL}?username=${usernameOrEmail}`)
     }
 
     retrieveUserByID(id) {
