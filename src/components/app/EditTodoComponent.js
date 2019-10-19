@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Table, Icon, Dropdown, Input } from 'semantic-ui-react'
 
 export class EditTodoComponent extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
-            description: '',
-            isDone: false,
-            priority: 1
+            description: this.props.data.description,
+            isDone: this.props.data.isDone,
+            priority: this.props.data.priority
         }
 
         this.okIconClicked = this.okIconClicked.bind(this)
@@ -18,15 +18,17 @@ export class EditTodoComponent extends Component {
     okIconClicked() {
 
         this.setState({description: this.description.value})
+        this.props.handler()
     }
 
 
     handleChange = (e, { priority }) => this.setState({ priority: priority })
 
 
+
     render() {
 
-        const { value } = this.state.priority
+        const { priority } = this.state.priority
 
         return (
                  <Table.Body>
@@ -39,7 +41,7 @@ export class EditTodoComponent extends Component {
                           placeholder='Priority'
                           options={priorities}
                           selection
-                          value={value}
+                          value={priority}
                         /></Table.Cell>
                         <Table.Cell>
                             <Input ref={desc => this.description = desc} placeholder='Description' />
@@ -59,18 +61,18 @@ export class EditTodoComponent extends Component {
 export default EditTodoComponent
 
   const priorities = [{
+          key: 0,
+          text: <Icon name='exclamation'/>,
+          value: 0
+      },
+      {
           key: 1,
-          text: `${<span><Icon name='exclamation'/></span>}`,
+          text: <Icon name='exclamation'/>,//<Icon name='exclamation'/>,
           value: 1
       },
       {
           key: 2,
-          text: `${<span><Icon name='exclamation'/><Icon name='exclamation'/></span>}`,
+          text: <Icon name='exclamation'/>,//<Icon name='exclamation'/><Icon name='exclamation'/>,
           value: 2
-      },
-      {
-          key: 3,
-          text: `${<span><Icon name='exclamation'/><Icon name='exclamation'/><Icon name='exclamation'/></span>}`,
-          value: 3
       }
   ]

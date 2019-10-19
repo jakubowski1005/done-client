@@ -19,6 +19,7 @@ export class LogoutComponent extends Component {
 
     componentWillUnmount() {
         clearTimeout(this.id)
+        clearInterval(this.interval)
     }
 
     render() {
