@@ -6,6 +6,7 @@ export class EditTodoComponent extends Component {
         super(props)
 
         this.state = {
+            id: this.props.data.id,
             description: this.props.data.description,
             isDone: this.props.data.isDone,
             priority: this.props.data.priority

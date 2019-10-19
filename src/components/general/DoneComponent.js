@@ -13,6 +13,7 @@ import SettingsComponent from '../app/SettingsComponent'
 import ErrorComponent from '../general/ErrorComponent'
 import TermsComponent from '../general/TermsComponent'
 import AuthenticatedRoute from '../account-handling/AuthenticatedRoute'
+import ForgetPasswordComponent from '../account-handling/ForgetPasswordComponent'
 import axios from 'axios'
 
 export class DoneComponent extends Component {
@@ -40,6 +41,7 @@ export class DoneComponent extends Component {
                             <Route path='/login' component={LoginComponent} />
                             <Route path='/register' component={RegisterComponent} />
                             <Route path='/logout' component={LogoutComponent} />
+                            <Route path='/forgetpassword' component={ForgetPasswordComponent} />
                             <AuthenticatedRoute path='/lists' component={ListsComponent} />
                             <AuthenticatedRoute path='/profile' component={ProfileComponent} />
                             <AuthenticatedRoute path='/settings' component={SettingsComponent} />
