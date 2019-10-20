@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Segment, Table, Header, Progress, Grid, Icon, Label } from 'semantic-ui-react'
 import TodoTemplateComponent from './TodoTemplateComponent'
 import TodoListService from '../../services/TodoListService'
+import EditTodoComponent from './EditTodoComponent'
 
 export class TodoListComponent extends Component {
     constructor(props) {
@@ -11,15 +12,32 @@ export class TodoListComponent extends Component {
             id: this.props.data.id,
             listname: this.props.data.listname,
             color: this.props.data.color,
-            todos: this.props.data.todos
+            todos: this.props.data.todos,
+            newTodoVisibility: false
         }
 
-        this.calculateProgress = this.calculateProgress.bind(this);
+        this.calculateProgress = this.calculateProgress.bind(this)
         this.addIconClicked = this.addIconClicked.bind(this)
         this.deleteIconClicked = this.deleteIconClicked.bind(this)
+        this.setNewTodoVisibility = this.setNewTodoVisibility.bind(this)
+        this.refreshList = this.refreshList.bind(this)
     }
 
-
+    refreshList() {
+        const userId = parseInt(sessionStorage.getItem('id'))
+        TodoListService.retrieveList(userId, this.state.id)
+            .then(res => {
+                this.setState({
+                    id: res.data.id,
+                    listname: res.data.listname,
+                    color: res.data.color,
+                    todos: res.data.todos
+                })
+            })
+            .catch(err => console.log(err))
+            console.log('refresh')
+            console.log(this.state)
+    }
 
     calculateProgress() {
         let completed = Object.keys(this.state.todos.filter((todo) => {
@@ -30,8 +48,12 @@ export class TodoListComponent extends Component {
         return Math.round(progress * 100);
     }
 
+    setNewTodoVisibility() {
+        this.setState({newTodoVisibility: !this.state.newTodoVisibility})
+    }
+
     addIconClicked() {
-        console.log('http post')
+        this.setNewTodoVisibility()
     }
 
     deleteIconClicked() {
@@ -42,6 +64,7 @@ export class TodoListComponent extends Component {
         
         this.props.refresh()
     }
+
 
 
     render() {
@@ -60,7 +83,16 @@ export class TodoListComponent extends Component {
                                     <Table.HeaderCell>Delete</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
-                            { this.state.todos.map( (todo) => <TodoTemplateComponent data={todo} />)}
+                            { this.state.todos.map( (todo) => <TodoTemplateComponent 
+                                                                key={todo.id} 
+                                                                refresh={this.refreshList}
+                                                                data={todo} 
+                                                                listId={this.state.id} />)}
+                            { this.state.newTodoVisibility && <EditTodoComponent 
+                                                                handler={this.setNewTodoVisibility} 
+                                                                refresh={this.refreshList}
+                                                                listId={this.state.id} 
+                                                                data={{id: -1, description: 'default', isDone: false, priority: 0}} />}
                             <Table.Footer fullWidth>
                                 <Table.Row>
                                     <Table.HeaderCell colSpan='1'>

@@ -11,7 +11,8 @@ export class TodoTemplateComponent extends Component {
             id: this.props.data.id,
             description: this.props.data.description,
             isDone: false,
-            priority: this.props.data.priority
+            priority: this.props.data.priority,
+            listId: this.props.listId
         }
 
         this.editModeHandler = this.editModeHandler.bind(this)
@@ -25,8 +26,8 @@ export class TodoTemplateComponent extends Component {
     render() {
         return (
             <>
-                {!this.state.editMode && <TodoComponent handler={this.editModeHandler} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
-                {this.state.editMode && <EditTodoComponent handler={this.editModeHandler} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
+                {!this.state.editMode && <TodoComponent refresh={this.props.refresh} handler={this.editModeHandler} listId={this.state.listId} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
+                {this.state.editMode && <EditTodoComponent refresh={this.props.refresh} handler={this.editModeHandler} listId={this.state.listId} data={{id: this.state.id, description: this.state.description, priority: this.state.priority, isDone: this.state.idDone}} />}
             </>
         )
     }

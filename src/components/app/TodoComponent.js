@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table, Icon, Checkbox } from 'semantic-ui-react'
+import TodoService from '../../services/TodoService'
 
 export class TodoComponent extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export class TodoComponent extends Component {
             id: this.props.data.id,
             description: this.props.data.description,
             isDone: this.props.data.isDone,
-            priority: this.props.data.priority
+            priority: this.props.data.priority,
+            listId: this.props.listId
         }
 
         this.deleteIconClicked = this.deleteIconClicked.bind(this)
@@ -19,10 +21,12 @@ export class TodoComponent extends Component {
 
 
     deleteIconClicked() {
-        console.log('http delete')
+        const userId = parseInt(sessionStorage.getItem('id'))
+        TodoService.deleteTodo(userId, this.state.listId, this.state.id)
+            .then(this.props.refresh())
     }
 
-        getPriority(priority) {
+    getPriority(priority) {
         switch (priority) {
             case "NORMAL":
                 return <span><Icon fitted name = 'exclamation' /></span>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table, Icon, Dropdown, Input } from 'semantic-ui-react'
+import TodoService from '../../services/TodoService'
 
 export class EditTodoComponent extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export class EditTodoComponent extends Component {
             id: this.props.data.id,
             description: this.props.data.description,
             isDone: this.props.data.isDone,
-            priority: this.props.data.priority
+            priority: this.props.data.priority,
+            listId: this.props.listId,
         }
 
         this.okIconClicked = this.okIconClicked.bind(this)
@@ -18,19 +20,33 @@ export class EditTodoComponent extends Component {
 
     okIconClicked() {
 
-        this.setState({description: this.description.value})
+        const todo = {
+            description: this.state.description,
+            isDone: false,
+            priority: this.state.priority
+        }
+
+        const userId = parseInt(sessionStorage.getItem('id'))
+
+        if (this.state.id === -1) {
+           TodoService.createTodo(userId, this.state.listId, todo)
+           .then(this.props.refresh())
+        } else {
+           TodoService.updateTodo(userId, this.state.listId, this.state.id, todo)
+            .then(this.props.refresh())
+        }
+        this.props.refresh()
         this.props.handler()
     }
 
 
-    handleChange = (e, { priority }) => this.setState({ priority: priority })
+    handleChange = (e, priority) => this.setState({ priority: priority.value.toUpperCase() })
 
-
+    handleInput = (e) => this.setState({description: e.target.value})
 
     render() {
-
         const { priority } = this.state.priority
-
+        console.log(this.state)
         return (
                  <Table.Body>
                     <Table.Row>
@@ -45,7 +61,7 @@ export class EditTodoComponent extends Component {
                           value={priority}
                         /></Table.Cell>
                         <Table.Cell>
-                            <Input ref={desc => this.description = desc} placeholder='Description' />
+                            <Input onChange={this.handleInput} placeholder='Description' />
                         </Table.Cell>
                         <Table.Cell>
                             <Icon link size='large' color='grey' name='check' onClick={this.okIconClicked} />
@@ -61,19 +77,32 @@ export class EditTodoComponent extends Component {
 
 export default EditTodoComponent
 
-  const priorities = [{
-          key: 0,
+const priorities = [{
+          key: 'normal',
           text: <Icon name='exclamation'/>,
-          value: 0
+          value: 'normal'
       },
       {
-          key: 1,
-          text: <Icon name='exclamation'/>,//<Icon name='exclamation'/>,
-          value: 1
+          key: 'high',
+          text: <span><Icon name='exclamation'/><Icon name='exclamation'/></span>,
+          value: 'high'
       },
       {
-          key: 2,
-          text: <Icon name='exclamation'/>,//<Icon name='exclamation'/><Icon name='exclamation'/>,
-          value: 2
+          key: 'urgent',
+          text: <span><Icon name='exclamation'/><Icon name='exclamation'/><Icon name='exclamation'/></span>,
+          value: 'urgent'
       }
   ]
+
+function mapPriorityToNumberValue(priority) {
+    switch(priority) {
+        case 'normal':
+            return 0
+        case 'high':
+            return 1
+        case'urgent':
+            return 2
+        default:
+            return 0
+    }
+}

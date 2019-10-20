@@ -42,8 +42,6 @@ export class ListsComponent extends Component {
                     }).catch(err => console.log(err));
 
             }).catch(err => console.log(err))
-
-        console.log(this.state)
     }
 
     handleNewListVisibility() {
@@ -61,7 +59,7 @@ export class ListsComponent extends Component {
                     <Grid>
                     { this.state.newListVisible && <EditTodoListComponent refresh={this.refreshLists} handler={this.handleNewListVisibility} data={{editMode: true, id: -1, color: 'violet', todos: []}} />}
                     { this.state.lists.map( (list) =>
-                        <ListTemplateComponent refresh={this.refreshLists} data={list} />
+                        <ListTemplateComponent key={list.id} refresh={this.refreshLists} data={list} />
                     )}
                     </Grid>
                 </Container>

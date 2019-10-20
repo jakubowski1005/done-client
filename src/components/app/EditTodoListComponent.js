@@ -81,7 +81,7 @@ export class EditTodoListComponent extends Component {
                                     <Table.HeaderCell>Delete</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
-                            { this.state.todos.map( (todo) => <TodoTemplateComponent data={todo} /> )}
+                            { this.state.todos.map( (todo) => <TodoTemplateComponent data={todo} listId={this.state.id}/> )}
                             <Table.Footer fullWidth>
                                 <Table.Row>
                                     <Table.HeaderCell colSpan='1'>
