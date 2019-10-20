@@ -24,19 +24,20 @@ export class TodoListComponent extends Component {
     }
 
     refreshList() {
+        console.log('refresh!!!')
         const userId = parseInt(sessionStorage.getItem('id'))
         TodoListService.retrieveList(userId, this.state.id)
             .then(res => {
+                console.log(this.state)
                 this.setState({
                     id: res.data.id,
                     listname: res.data.listname,
                     color: res.data.color,
                     todos: res.data.todos
                 })
+                console.log(this.state)
             })
             .catch(err => console.log(err))
-            console.log('refresh')
-            console.log(this.state)
     }
 
     calculateProgress() {

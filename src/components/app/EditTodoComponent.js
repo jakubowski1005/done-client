@@ -46,7 +46,7 @@ export class EditTodoComponent extends Component {
 
     render() {
         const { priority } = this.state.priority
-        console.log(this.state)
+
         return (
                  <Table.Body>
                     <Table.Row>
@@ -79,17 +79,17 @@ export default EditTodoComponent
 
 const priorities = [{
           key: 'normal',
-          text: <Icon name='exclamation'/>,
+          text: <Icon fitted name='exclamation'/>,
           value: 'normal'
       },
       {
           key: 'high',
-          text: <span><Icon name='exclamation'/><Icon name='exclamation'/></span>,
+          text: <span><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/></span>,
           value: 'high'
       },
       {
           key: 'urgent',
-          text: <span><Icon name='exclamation'/><Icon name='exclamation'/><Icon name='exclamation'/></span>,
+          text: <span><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/></span>,
           value: 'urgent'
       }
   ]

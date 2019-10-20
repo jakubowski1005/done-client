@@ -19,11 +19,11 @@ export class TodoComponent extends Component {
     }
 
 
-
     deleteIconClicked() {
         const userId = parseInt(sessionStorage.getItem('id'))
         TodoService.deleteTodo(userId, this.state.listId, this.state.id)
             .then(this.props.refresh())
+        this.props.refresh()
     }
 
     getPriority(priority) {
@@ -39,12 +39,16 @@ export class TodoComponent extends Component {
         }
     }
 
+    handleCheck = (e) => {
+        console.log(this.state.isDone)
+        this.setState({isDone: !this.state.isDone})}
+
     render() {
         return (
             <>
                 <Table.Body>
                     <Table.Row>
-                        <Table.Cell>{this.state.isDone ? <Checkbox defaultChecked /> : <Checkbox />}</Table.Cell>
+                        <Table.Cell>{this.state.isDone ? <Checkbox defaultChecked onChange={this.handleCheck} /> : <Checkbox onChange={this.handleCheck} />}</Table.Cell>
                         <Table.Cell>{this.getPriority(this.state.priority)}</Table.Cell>
                         <Table.Cell>{this.state.description}</Table.Cell>
                         <Table.Cell>

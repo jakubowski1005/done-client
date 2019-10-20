@@ -29,7 +29,7 @@ export class EditTodoListComponent extends Component {
     }
 
     okIconClicked() {
-        console.log(this.state)
+
         const userId = sessionStorage.getItem('id')
         const list = {
             listname: this.state.listname,
@@ -37,7 +37,6 @@ export class EditTodoListComponent extends Component {
             todos: this.state.todos,
             user_id: parseInt(userId)
         }
-        console.log(list)
            
         if(this.state.id === -1) {
             TodoListService.addNewList(userId, list)
@@ -48,11 +47,8 @@ export class EditTodoListComponent extends Component {
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
         }
-        console.log("1")
         this.props.handler()
-        console.log("2")
         this.props.refresh()
-        console.log("3")
        }
 
 
