@@ -1,27 +1,24 @@
 import axios from 'axios'
-import { API_URL } from '../constants/constants'
-
-
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'autheticatedUser'
+import { AUTH_URL } from '../constants/constants'
 
 class AuthService {
 
     loginUser(usernameOrEmail, password) {
-        return axios.post(`${API_URL}/auth/signin`, {usernameOrEmail, password})
+        return axios.post(`${AUTH_URL}/signin`, {usernameOrEmail, password})
     }
 
     registerUser(username, email, password) {
-        return axios.post(`${API_URL}/auth/signup`, {username, email, password})
+        return axios.post(`${AUTH_URL}/signup`, {username, email, password})
     }
 
     registerSuccessfulLoginForJwt(username, token) {
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+        sessionStorage.setItem('autheticatedUser', username);
         sessionStorage.setItem('token', token);
-        this.setupAxiosInterceptors(this.createJwtToken(token))
+        //this.setupAxiosInterceptors(this.createJwtToken(token))
     }
 
     getLoggedInUsername() {
-        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        let user = sessionStorage.getItem('autheticatedUser');
         if (user === null) return '';
         return user;
     }
@@ -31,24 +28,22 @@ class AuthService {
     }
 
     logout() {
-        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        sessionStorage.removeItem('autheticatedUser');
         sessionStorage.removeItem('id')
         sessionStorage.removeItem('token')
     }
 
     isUserLoggedIn() {
-        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
+        let user = sessionStorage.getItem('autheticatedUser')
         if (user === null) return false;
         return true
     }
 
     setupAxiosInterceptors(authHeader) {
-        console.log(authHeader)
         axios.interceptors.request.use(
             function(config) {
                 console.log(config)
                 //if (this.isUserLoggedIn()) {
-                    console.log(sessionStorage.getItem('token'))
                     const jwt = 'Bearer ' + sessionStorage.getItem('token')
                     config.headers.Authorization = jwt
                     //config.headers.accept = "application/json"

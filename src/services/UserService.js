@@ -1,34 +1,34 @@
 import axios from 'axios'
-import { API_USERS_URL } from '../constants/constants'
+import { USERS_URL } from '../constants/constants'
 
 class UserService {
     
     retrieveUserByUsernameOrEmail(usernameOrEmail) {
-        return axios.get(`${API_USERS_URL}?username=${usernameOrEmail}`)
+        return axios.get(`${USERS_URL}?username=${usernameOrEmail}`)
     }
 
     retrieveUserByID(id) {
-        return axios.get(`${API_USERS_URL}/${id}`)
+        return axios.get(`${USERS_URL}/${id}`)
     }
 
     deleteUserByID(id) {
-        return axios.delete(`${API_USERS_URL}/${id}`)
+        return axios.delete(`${USERS_URL}/${id}`)
     }
 
     getUserProperties(id) {
-        return axios.get(`${API_USERS_URL}/${id}/properties`)
+        return axios.get(`${USERS_URL}/${id}/properties`)
     }
 
     getUserStatistics(id) {
-        return axios.get(`${API_USERS_URL}/${id}/statistics`)
+        return axios.get(`${USERS_URL}/${id}/statistics`)
     }
 
     putUserProperties(id, properties) {
-        return axios.put(`${API_USERS_URL}/${id}/properties`, properties)
+        return axios.put(`${USERS_URL}/${id}/properties`, properties)
     }
 
     putUserStatistics(id, statistics) {
-        return axios.put(`${API_USERS_URL}/${id}/statistics`, statistics)
+        return axios.put(`${USERS_URL}/${id}/statistics`, statistics)
     }
 
 }

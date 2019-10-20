@@ -24,35 +24,25 @@ export class ProfileComponent extends Component {
 
     componentDidMount() {
 
-        // UserService.retrieveUserByUsernameOrEmail(sessionStorage.getItem('autheticatedUser'))
-        //     .then(res => {
-        //         this.setState({id: res.data.id})
-
-        UserService.getUserProperties(38)
+        UserService.retrieveUserByUsernameOrEmail(sessionStorage.getItem('autheticatedUser'))
             .then(res => {
                 console.log(res)
                 this.setState({
-                name: res.data.name,
-                lastName: res.data.lastName,
-                gender: res.data.gender,
-                nationality: res.data.nationality
-            })})
-        
-        UserService.getUserStatistics(38)
-            .then(res => {
-                console.log(res)
-                this.setState({
-                completedTasks: res.data.completedTasks,
-                completedLists: res.data.completedLists,
-                daysWithApp: res.data.daysWithApp,
-                activeLists: res.data.activeLists
-            })})
-            //})
-
-        
-    }
+                id: res.data.id,
+                name: res.data.userProperties.name,
+                lastName: res.data.userProperties.lastName,
+                gender: res.data.userProperties.gender,
+                nationality: res.data.userProperties.nationality,
+                completedTasks: res.data.userStatistics.completedTasks,
+                completedLists: res.data.userStatistics.completedLists,
+                daysWithApp: res.data.userStatistics.daysWithApp,
+                activeLists: res.data.userStatistics.activeLists
+            })
+    })
+}
 
     getFullName() {
+        if (this.state.name === '' || this.state.lastName === '') return 'Set up your data in settings menu'
         let fullName = this.state.name + ' ' + this.state.lastName;
         return fullName
     }
@@ -71,6 +61,7 @@ export class ProfileComponent extends Component {
     }
 
     getNationality() {
+        if (this.state.nationality === 'unknown') return <span><Icon name='question' /> Unknown</span>
         let country = countries.filter(c => c.countryCode === this.state.nationality)[0]
         return <span><Flag fontSize='3rem' name={`${country.countryCode}`} /> {country.name}</span>
     }

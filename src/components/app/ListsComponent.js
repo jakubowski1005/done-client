@@ -30,9 +30,9 @@ export class ListsComponent extends Component {
         UserService.retrieveUserByUsernameOrEmail(this.state.username)
             .then(res => {
                 this.setState({
-                    userId: res.data[0].id,
+                    userId: res.data.id,
                 })
-                sessionStorage.setItem('id', res.data[0].id)
+                sessionStorage.setItem('id', res.data.id)
 
                 TodoListService.retrieveAllLists(this.state.userId)
                     .then(res => {
