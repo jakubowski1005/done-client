@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AUTH_URL } from '../constants/constants'
+import { AUTH_URL } from '../constants/URL'
 
 class AuthService {
 

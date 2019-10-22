@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Icon, Dropdown, Input } from 'semantic-ui-react'
 import TodoService from '../../services/TodoService'
+import { priorities } from '../../constants/Data'
 
 export class EditTodoComponent extends Component {
     constructor(props) {
@@ -76,33 +77,3 @@ export class EditTodoComponent extends Component {
 }
 
 export default EditTodoComponent
-
-const priorities = [{
-          key: 'normal',
-          text: <Icon fitted name='exclamation'/>,
-          value: 'normal'
-      },
-      {
-          key: 'high',
-          text: <span><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/></span>,
-          value: 'high'
-      },
-      {
-          key: 'urgent',
-          text: <span><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/><Icon fitted name='exclamation'/></span>,
-          value: 'urgent'
-      }
-  ]
-
-function mapPriorityToNumberValue(priority) {
-    switch(priority) {
-        case 'normal':
-            return 0
-        case 'high':
-            return 1
-        case'urgent':
-            return 2
-        default:
-            return 0
-    }
-}

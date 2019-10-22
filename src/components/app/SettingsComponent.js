@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import { Container, Grid, Message, Icon, Placeholder, Segment, Input, Button } from 'semantic-ui-react'
+import { Container, Grid, Message, Icon, Placeholder, Segment, Input, Button, Dropdown } from 'semantic-ui-react'
 import UserService from '../../services/UserService'
+import { countries, genders } from '../../constants/Data'
 
 export class SettingsComponent extends Component {
     constructor() {
         super()
 
-        this.state = {}
+        this.state = {
+            id: -1,
+            name: '',
+            lastName: '',
+            gender: '',
+            nationality: ''
+        }
 
         this.deleteAccount = this.deleteAccount.bind(this)
         this.confirmChanges = this.confirmChanges.bind(this)
@@ -16,6 +23,7 @@ export class SettingsComponent extends Component {
 
     UserService.retrieveUserByUsernameOrEmail(sessionStorage.getItem('autheticatedUser'))
         .then(res => {
+            console.log(res)
             this.setState({
             id: res.data.id,
             name: res.data.userProperties.name,
@@ -36,7 +44,12 @@ export class SettingsComponent extends Component {
 
     handleInput = e => this.setState({[e.target.name]: e.target.value})
 
+    handleChange = e => this.setState({[e.target.name]: e.target.value})
+
     render() {
+        const gender = this.state.gender
+        const nationality = this.state.nationality
+
         return (
             <div>
                 <Container padding='50px 50px 50px' textAlign='center'>
@@ -47,9 +60,25 @@ export class SettingsComponent extends Component {
                         </Placeholder>
                         </Grid.Column>
                         <Grid.Column width={4} textAlign='center'>
-                            <Input placeholder={this.state.name === '' ? 'Name' : this.state.name} name='name' onChange={this.handleInput} />
-                            <Input placeholder={this.state.name === '' ? 'Lastname' : this.state.name} name='lastName' onChange={this.handleInput} />
-                            <Button color='blue' onClick={this.confirmChanges}>Confirm</Button>
+                            <Segment>
+                                <Input placeholder={this.state.name === '' ? 'Name' : this.state.name} name='name' onChange={this.handleInput} />
+                                <Input placeholder={this.state.name === '' ? 'Last Name' : this.state.name} name='lastName' onChange={this.handleInput} />
+                                <Dropdown
+                                    onChange={this.handleChange}
+                                    name='gender'
+                                    placeholder='Gender'
+                                    options={genders}
+                                    selection
+                                    value={gender}/>
+                                <Dropdown
+                                    onChange={this.handleChange}
+                                    name='nationality'
+                                    placeholder='Nationality'
+                                    options={countries}
+                                    selection
+                                    value={nationality}/>
+                                <Button color='blue' onClick={this.confirmChanges}>Confirm</Button>
+                            </Segment>
                         </Grid.Column>
                         <Grid.Column width={4} textAlign='center'>
                             <Message color='red'>
@@ -65,3 +94,5 @@ export class SettingsComponent extends Component {
 }
 
 export default SettingsComponent
+
+

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Segment, Table, Progress, Grid, Icon, Input, Dropdown, Label } from 'semantic-ui-react'
 import TodoTemplateComponent from './TodoTemplateComponent'
 import TodoListService from '../../services/TodoListService'
+import { colors } from '../../constants/Data'
 
 export class EditTodoListComponent extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export class EditTodoListComponent extends Component {
         const userId = sessionStorage.getItem('id')
         const list = {
             listname: this.state.listname,
-            color: mapColorToNumberValue(this.state.color),
+            color: this.state.color,
             todos: this.state.todos,
             user_id: parseInt(userId)
         }
@@ -84,7 +85,7 @@ export class EditTodoListComponent extends Component {
                                         <Dropdown
                                           onChange={this.handleChange}
                                           placeholder='Color'
-                                          options={colorsArr}
+                                          options={colors}
                                           selection
                                           value={color}
                                         />
@@ -106,63 +107,29 @@ export class EditTodoListComponent extends Component {
 
 export default EditTodoListComponent
 
-const colorsArr = [{
-          key: 'green',
-          text: <Label circular color='green'/>,
-          value: 'green'
-      },
-      {
-          key: 'red',
-          text: <Label circular color='red'/>,
-          value: 'red'
-      },
-      {
-          key: 'purple',
-          text: <Label circular color='purple'/>,
-          value: 'purple'
-      },
-      {
-          key: 'pink',
-          text: <Label circular color='pink'/>,
-          value: 'pink'
-      },
-      {
-          key: 'orange',
-          text: <Label circular color='orange'/>,
-          value: 'orange'
-      },
-      {
-          key: 'yellow',
-          text: <Label circular color='yellow'/>,
-          value: 'yellow'
-      },
-      {
-          key: 'grey',
-          text: <Label circular color='grey'/>,
-          value: 'grey'
-      }]
 
-function mapColorToNumberValue(color) {
 
-    switch(color) {
-        case 'green':
-            return 0
-        case 'red':
-            return 1
-        case 'blue':
-            return 2
-        case 'purple':
-            return 3
-        case 'pink':
-            return 4
-        case 'orange':
-            return 5
-        case 'yellow':
-            return 6
-        case 'grey':
-            return 8
-        default:
-            return 0
+// function mapColorToNumberValue(color) {
 
-    }
-}
+//     switch(color) {
+//         case 'green':
+//             return 0
+//         case 'red':
+//             return 1
+//         case 'blue':
+//             return 2
+//         case 'purple':
+//             return 3
+//         case 'pink':
+//             return 4
+//         case 'orange':
+//             return 5
+//         case 'yellow':
+//             return 6
+//         case 'grey':
+//             return 8
+//         default:
+//             return 0
+
+//     }
+// }

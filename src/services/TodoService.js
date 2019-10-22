@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { USERS_URL } from '../constants/constants'
+import { USERS_URL } from '../constants/URL'
 
 class TodoService {
 
