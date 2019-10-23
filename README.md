@@ -26,4 +26,5 @@
 
 - [ ] Change user interface design
 - [ ] Make page responsive
+- [ ] Cleanup and refactor code
 - [ ] Deploy the application
