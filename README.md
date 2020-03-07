@@ -1,8 +1,8 @@
 # Done!
 
-***Done!*** is simple web application that allows to organize work by dividing task into smaller pieces
+***Done!*** is a simple web application that allows you to organize your work by managing task lists
 
-*This repository is responsible for client-side part of application. Server-side part of the app is available [here](https://github.com/jakubowski1005/done-api).*
+*This repository contains client-side part of application. Server-side part of the app is available [here](https://github.com/jakubowski1005/done-api).*
 
 
 ## Table of content
